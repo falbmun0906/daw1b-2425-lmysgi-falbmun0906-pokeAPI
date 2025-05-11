@@ -8,6 +8,13 @@ const pesoSpan = document.getElementById("peso-pkmn-span");
 const tipoSpan = document.getElementById("tipo-pkmn-span");
 const pokemonSelect = document.getElementById("pokemonSelect");
 
+const defaultOption = document.createElement('option')
+defaultOption.textContent = "Elige una opción";
+defaultOption.value = "";
+defaultOption.selected = true;
+pokemonSelect.appendChild(defaultOption)
+pokemonSelect.hidden = true
+
 fetch(`https://pokeapi.co/api/v2/pokemon?limit=1302`)
         .then(res => res.json())
         .then(data => {
@@ -18,10 +25,11 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=1302`)
 
 button.addEventListener('click', (e) => {
     pokemonSelect.innerHTML = '';
+    pokemonSelect.hidden = false
     const pokemonFiltro = input.value;
     const filtrados = allPokemons.results.filter(pokemon => pokemon.name.includes(pokemonFiltro.toLowerCase()))
-    console.log(filtrados)
-
+    pokemonSelect.appendChild(defaultOption)
+    
     filtrados.forEach(nombre => {
         const option = document.createElement('option');
         option.value = nombre.name;
@@ -63,3 +71,10 @@ pokemonSelect.addEventListener('change', () => {
         })
         .catch(err => console.log(`Error al obtener el Pokémon`, err));
 })
+
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    button.click();
+  }
+});
