@@ -66,6 +66,7 @@ body {
 }
 
 button {
+    font-family: "Press Start 2P", system-ui;
     margin: 15px auto;
     width: 100px;
     padding: 10px;
@@ -74,4 +75,8 @@ button {
 
 button:hover {
     background-color: rgb(174, 212, 227);
+}
+
+.mas-informacion button {
+    width: auto;
 }
