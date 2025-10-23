@@ -1,80 +1,113 @@
-const button = document.getElementById('pkmn-srch');
-const input = document.getElementById('input-pkmn')
-const buscador = document.getElementById("buscador");
-const imagenPkmn = document.getElementById("imagen-pkmn");
-const nombreSpan = document.getElementById("nombre-pkmn-span");
-const alturaSpan = document.getElementById("altura-pkmn-span");
-const pesoSpan = document.getElementById("peso-pkmn-span");
-const tipoSpan = document.getElementById("tipo-pkmn-span");
-const pokemonSelect = document.getElementById("pokemonSelect");
+// ----- DOM Elements -----
+const elements = {
+    button: document.getElementById('search__button'),
+    input: document.getElementById('search__input'),
+    select: document.getElementById('search__select'),
+    image: document.getElementById('pokemon-image'),
+    name: document.getElementById('pokemon-name'),
+    height: document.getElementById('pokemon-height'),
+    weight: document.getElementById('pokemon-weight'),
+    type: document.getElementById('pokemon-type')
+};
 
-const defaultOption = document.createElement('option')
-defaultOption.textContent = "Elige una opción";
-defaultOption.value = "";
-defaultOption.selected = true;
-pokemonSelect.appendChild(defaultOption)
-pokemonSelect.hidden = true
+let allPokemons = [];
 
-fetch(`https://pokeapi.co/api/v2/pokemon?limit=1302`)
-        .then(res => res.json())
-        .then(data => {
-            allPokemons = data
-            console.log(allPokemons)
-        })
-        .catch(err => console.log(`Error al obtener los Pokémons`, err))
+// ----- Constants -----
+const API_BASE = 'https://pokeapi.co/api/v2/pokemon';
+const DEFAULT_OPTION = document.createElement('option');
+DEFAULT_OPTION.textContent = 'Elige una opción';
+DEFAULT_OPTION.value = '';
+DEFAULT_OPTION.selected = true;
+DEFAULT_OPTION.style.minHeight = '300px';
 
-button.addEventListener('click', (e) => {
-    pokemonSelect.innerHTML = '';
-    pokemonSelect.hidden = false
-    const pokemonFiltro = input.value;
-    const filtrados = allPokemons.results.filter(pokemon => pokemon.name.includes(pokemonFiltro.toLowerCase()))
-    pokemonSelect.appendChild(defaultOption)
-    
-    filtrados.forEach(nombre => {
+// ----- Initialization -----
+init();
+
+function init() {
+    elements.select.hidden = true;
+    fetchAllPokemons();
+    setupEventListeners();
+}
+
+// ----- Fetch Functions -----
+async function fetchAllPokemons() {
+    try {
+        const res = await fetch(`${API_BASE}?limit=1302`);
+        const data = await res.json();
+        allPokemons = data.results;
+    } catch (err) {
+        console.error('Error al obtener los Pokémons:', err);
+    }
+}
+
+async function fetchPokemonDetails(name) {
+    try {
+        const res = await fetch(`${API_BASE}/${name}`);
+        if (!res.ok) throw new Error('Pokémon no encontrado');
+        const data = await res.json();
+        renderPokemonDetails(data);
+    } catch (err) {
+        console.error('Error al obtener el Pokémon:', err);
+    }
+}
+
+// ----- Rendering -----
+function renderPokemonOptions(filtered) {
+    elements.select.innerHTML = '';
+    elements.select.appendChild(DEFAULT_OPTION);
+
+    if (filtered.length === 0) {
+        const emptyOption = document.createElement('option');
+        emptyOption.textContent = 'Sin resultados';
+        elements.select.appendChild(emptyOption);
+        return;
+    }
+
+    filtered.forEach(pkmn => {
         const option = document.createElement('option');
-        option.value = nombre.name;
-        option.textContent = nombre.name;
-        pokemonSelect.appendChild(option)
-    })
-})
+        option.value = pkmn.name;
+        option.textContent = capitalize(pkmn.name);
+        elements.select.appendChild(option);
+    });
 
-pokemonSelect.addEventListener('change', () => {
-    const seleccion = pokemonSelect.value;
-    if (!seleccion) return;
-    
-    
-    fetch(`https://pokeapi.co/api/v2/pokemon/${seleccion}`)
-        .then(res => res.json())
-        .then(data => {
-            const nombre = data.name
-            const altura = data.height
-            const peso = data.weight
-            const tipos = data.types
+    elements.select.hidden = false;
+}
 
-            console.log('Nombre:', nombre);
-            console.log('Altura:', altura);
-            console.log('Peso:', peso);
-            tipos.forEach(tipo => {
-                console.log('Tipo:', tipo.type.name);
-            })
-            console.log('Imagen:', data.sprites.front_default);
+function renderPokemonDetails(data) {
+    const { name, height, weight, sprites, types } = data;
+    elements.image.src = sprites.front_default || '';
+    elements.name.textContent = capitalize(name);
+    elements.height.textContent = `${height / 10} m`;
+    elements.weight.textContent = `${weight / 10} kg`;
+    elements.type.textContent = types.map(t => capitalize(t.type.name)).join(', ');
+}
 
-            imagenPkmn.src = data.sprites.front_default;
-            nombreSpan.innerHTML = nombre
-            alturaSpan.innerHTML = altura;
-            pesoSpan.innerHTML = peso;
+// ----- Events -----
+function setupEventListeners() {
+    elements.button.addEventListener('click', handleSearch);
+    elements.input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSearch();
+        }
+    });
+    elements.select.addEventListener('change', handleSelection);
+}
 
-            let tiposStr = ''
-            tipos.forEach(tipo => {tiposStr = tiposStr + ' ' + tipo.type.name})
-            tipoSpan.innerHTML = tiposStr;
+function handleSearch() {
+    const query = elements.input.value.trim().toLowerCase();
+    if (!query) return;
 
-        })
-        .catch(err => console.log(`Error al obtener el Pokémon`, err));
-})
+    const filtered = allPokemons.filter(p => p.name.includes(query));
+    renderPokemonOptions(filtered);
+}
 
-input.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    button.click();
-  }
-});
+function handleSelection() {
+    const selected = elements.select.value;
+    if (selected) fetchPokemonDetails(selected);
+}
+
+// ----- Utilidades -----
+function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+}

@@ -1,36 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pokédex de Fran</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="index.js" defer></script>
 </head>
-<body>
-    <header>
-    </header>
-    <main>
-        <div class="buscador-pkmn">
-            <h1>Pokédex de Fran</h1>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg" alt="Logotipo de Pokémon" class="logo-portada">
-            <div class="buscador" id="buscador-id">
-                <input type="text" name="pokemon" id="input-pkmn">
-                <select id="pokemonSelect"></select>
-                <button id="pkmn-srch">
-                <img src="https://art.pixilart.com/60a7c101219ee5f.png" alt="Logotipo de Pokémon" id="pokeball">
-                </button>
-                <p id="nombre-pkmn">Nombre: <span id="nombre-pkmn-span"></span></p>
-                <p id="">Altura: <span id="altura-pkmn-span"></span></p>
-                <p>Peso: <span id="peso-pkmn-span"></span></p>
-                <p>Tipo: <span id="tipo-pkmn-span"></span></p>
-                <img src="https://25.media.tumblr.com/tumblr_m5zyheRG0l1qj7ct2o1_500.gif" alt="Logotipo de Pokémon" id="imagen-pkmn">
+
+<body class="page">
+    <header class="header"></header>
+    <main class="pokedex">
+        <h1 class="pokedex__title">Pokédex de Fran</h1>
+
+        <img
+                src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                alt="Logotipo de Pokémon"
+                class="pokedex__logo"
+        >
+
+        <section class="pokedex__search search">
+            <input
+                    type="text"
+                    id="search__input"
+                    name="pokemon"
+                    class="search__input"
+                    placeholder="Busca un Pokémon..."
+            >
+
+            <select id="search__select" class="search__select"></select>
+
+            <button id="search__button" class="search__button" aria-label="Buscar Pokémon">
+                <img
+                        src="https://art.pixilart.com/60a7c101219ee5f.png"
+                        alt="Icono Pokéball"
+                        class="search__icon"
+                >
+            </button>
+
+            <div class="search__results">
+                <p class="search__data">Nombre: <span id="pokemon-name" class="search__value"></span></p>
+                <p class="search__data">Altura: <span id="pokemon-height" class="search__value"></span></p>
+                <p class="search__data">Peso: <span id="pokemon-weight" class="search__value"></span></p>
+                <p class="search__data">Tipo: <span id="pokemon-type" class="search__value"></span></p>
             </div>
-            <div class="mas-informacion">
-                <button id="mas-info">Más información</button>
-            </div>
+
+            <a class="search__link" href="fullinfo.html" aria-label="Ver más información del Pokémon">
+                <img
+                        src="https://25.media.tumblr.com/tumblr_m5zyheRG0l1qj7ct2o1_500.gif"
+                        alt="Imagen del Pokémon"
+                        class="search__image"
+                        id="pokemon-image"
+                >
+            </a>
+        </section>
+
+        <div class="pokedex__extra">
+            <button id="extra__button" class="extra__button">Más información</button>
         </div>
     </main>
 </body>

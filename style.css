@@ -1,82 +1,110 @@
-body {
+body.page {
     font-family: "Press Start 2P", system-ui;
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    background-color: #fdfdfd;
 }
 
-.buscador-pkmn {
+.pokedex {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-weight: 400;
-    font-style: normal;
     margin: 2rem auto;
-    padding: 1rem 2rem;
+    padding: 2rem;
     background-color: antiquewhite;
-    border-radius: 10px;
     border: 3px solid #db8282;
+    border-radius: 10px;
 }
 
-.logo-portada {
+.pokedex__title {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.pokedex__logo {
     width: 10rem;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
 }
 
-.buscador {
+.search {
     display: flex;
     flex-direction: column;
-    align-content: center;
-    margin: 0 auto;
-    padding: 5px;
-
-    p {
-        font-size: 1.2rem;
-        font-weight: bold;
-        height: 50%;
-    }
-
-    input {
-        height: 2rem;
-        padding: 10px;
-        font-family: "Press Start 2P", system-ui;
-        text-align: center;
-    }
-
-    select {
-        padding: 10px;
-        font-family: "Press Start 2P", system-ui;
-        text-align: center;
-    }
-
-    span {
-       font-weight: normal;
-    }
-
+    align-items: center;
+    gap: 0.6rem;
 }
 
-#pokeball {
-    width: 30px;
-}
-
-#imagen-pkmn {
-    min-width: 150px;
-    max-width: 250px;
-    margin: 0 auto;
-}
-
-button {
+.search__input,
+.search__select {
+    width: 100%;
+    padding: 10px 0;
     font-family: "Press Start 2P", system-ui;
-    margin: 15px auto;
+    text-align: center;
+    border: 2px solid #db8282;
+    border-radius: 5px;
+}
+
+option {
+    min-height: 2rem;
+}
+
+.search__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
     width: 100px;
     padding: 10px;
-    font-weight: 600;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
+.search__button:hover {
     background-color: rgb(174, 212, 227);
 }
 
-.mas-informacion button {
-    width: auto;
+.search__icon {
+    width: 30px;
+}
+
+.search__results {
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.search__data {
+    font-weight: bold;
+}
+
+.search__value {
+    font-weight: normal;
+}
+
+.search__link {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.search__image {
+    min-width: 150px;
+    max-width: 250px;
+}
+
+.extra__button {
+    font-family: "Press Start 2P", system-ui;
+    padding: 10px 20px;
+    border: 2px solid #db8282;
+    border-radius: 6px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.extra__button:hover {
+    background-color: rgb(174, 212, 227);
 }
