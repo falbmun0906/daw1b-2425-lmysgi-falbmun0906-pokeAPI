@@ -2,19 +2,50 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Pokédex de Fran</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="index.js" defer></script>
 </head>
-<body>
-    <header></header>
-    <main>
-        <div id="contenedorInformacion">
-            FUNCIONAAAAA JEJEJE
+
+<body class="page">
+    <header class="header"></header>
+    <main class="pokedex">
+        <h1 class="pokedex__title">Pokédex de Fran</h1>
+
+        <a href="index.html" class="pokedex__link">
+            <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+                    alt="Logotipo de Pokémon"
+                    class="pokedex__logo"
+            >
+        </a>
+
+
+        <div class="search__results">
+            <p class="search__data">Nombre: <span id="pokemon-name" class="search__value"></span></p>
+            <p class="search__data">Altura: <span id="pokemon-height" class="search__value"></span></p>
+            <p class="search__data">Peso: <span id="pokemon-weight" class="search__value"></span></p>
+            <p class="search__data">Tipo: <span id="pokemon-type" class="search__value"></span></p>
+            <p class="search__data">Habilidades: <span id="pokemon-abilities" class="search__value"></span></p>
+            <ul id="pokemon-stats" class="pokemon__stats-list"></ul>
+            <ul id="pokemon-moves" class="pokemon__moves-list">ohjsdufhfsdufhsudfhusd</ul>
+        </div>
+
+        <a class="search__link" href="#" aria-label="Ver más información del Pokémon">
+            <img
+                    src="https://25.media.tumblr.com/tumblr_m5zyheRG0l1qj7ct2o1_500.gif"
+                    alt="Imagen del Pokémon"
+                    class="search__image"
+                    id="pokemon-image"
+            >
+        </a>
+
+        <div class="pokedex__volver">
+            <button id="volver__button" class="volver__button">Volver</button>
         </div>
     </main>
-    <footer></footer>
 </body>
 </html>
