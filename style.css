@@ -13,6 +13,7 @@ body.page {
     font-family: "Press Start 2P", system-ui;
     display: flex;
     justify-content: center;
+    height: 919px;
     margin: 0 auto;
     background-color: #fdfdfd;
 }
@@ -31,18 +32,21 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: auto;
+    margin: auto 0;
     padding: 2rem;
     background-color: #ffffff;
     border: 3px solid #dc3838;
     border-radius: 5px;
+    align-self: flex-start;
 }
 
 .pokedex__title {
     width: 200px;
+    margin-bottom: 0.5rem;
 }
 
 .search {
-    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,12 +115,11 @@ option {
 }
 
 .search__image {
-    min-width: 150px;
-    max-width: 250px;
+    min-width: 250px;
+    max-width: 350px;
 }
 
 .extra__button, button {
-    margin-top: 2rem;
     font-family: "Press Start 2P", system-ui;
     padding: 10px 20px;
     border: 2px solid var(--var-rojoAcento);
@@ -131,7 +134,7 @@ option {
 }
 
 .pokedex__extra {
-    margin-top: 2rem;
+    margin-top: 0.5rem;
 }
 
 .pokemon__stats-list, .pokemon__moves-list {
