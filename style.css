@@ -1,3 +1,14 @@
+* {
+    --var-rojo: #c83f3f;
+    --var-rojoAcento: #db8282;
+    --var-rojoHover: #ffe5e5;
+    margin: 0;
+}
+
+html {
+    box-sizing: border-box;
+}
+
 body.page {
     font-family: "Press Start 2P", system-ui;
     display: flex;
@@ -20,25 +31,18 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 2rem auto;
     padding: 2rem;
-    background-color: antiquewhite;
-    border: 3px solid #db8282;
-    border-radius: 10px;
+    background-color: #ffffff;
+    border: 3px solid #dc3838;
+    border-radius: 5px;
 }
 
 .pokedex__title {
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.pokedex__logo {
-    width: 10rem;
-    margin-bottom: 2rem;
+    width: 200px;
 }
 
 .search {
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,8 +55,12 @@ li {
     padding: 10px 0;
     font-family: "Press Start 2P", system-ui;
     text-align: center;
-    border: 2px solid #db8282;
+    border: 2px solid var(--var-rojoAcento);
     border-radius: 5px;
+}
+
+.search__input:focus {
+    border-color: var(--var-rojo);
 }
 
 option {
@@ -81,10 +89,12 @@ option {
 }
 
 .search__results {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     max-width: 30rem;
     font-size: 0.9rem;
-    text-align: center;
-    margin: 0.5rem 0;
+    text-align: left;
 }
 
 .search__data {
@@ -109,7 +119,7 @@ option {
     margin-top: 2rem;
     font-family: "Press Start 2P", system-ui;
     padding: 10px 20px;
-    border: 2px solid #db8282;
+    border: 2px solid var(--var-rojoAcento);
     border-radius: 6px;
     background-color: #fff;
     cursor: pointer;
@@ -117,9 +127,15 @@ option {
 }
 
 .extra__button:hover, button:hover {
-    background-color: rgb(174, 212, 227);
+    background-color: var(--var-rojoHover);
 }
 
 .pokedex__extra {
     margin-top: 2rem;
+}
+
+.pokemon__stats-list, .pokemon__moves-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
 }

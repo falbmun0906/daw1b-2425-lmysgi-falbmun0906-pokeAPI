@@ -100,6 +100,14 @@ function renderPokemonOptions(filtered) {
 
     elements.select.hidden = false;
 
+    if (filtered.length === 1) {
+        const selectedName = filtered[0].name;
+        if (selectedName) {
+            localStorage.setItem('selectedPokemonName', selectedName);
+            fetchPokemonDetails(selectedName);
+        }
+    }
+
     // Elimina cualquier listener previo para evitar duplicidades
     elements.select.onchange = function () {
         // Guarda el nombre del Pokémon seleccionado en localStorage
